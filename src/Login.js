@@ -20,7 +20,7 @@ class Login extends Component {
 
   login(e) {
     e.preventDefault();
-    
+
     fire
       .auth()
       .signInWithEmailAndPassword(this.state.email, this.state.password)
@@ -28,7 +28,7 @@ class Login extends Component {
       .catch(error => {
         console.log(error);
       });
-      console.log('hi there');
+    console.log("hi there");
   }
 
   signup(e) {

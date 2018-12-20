@@ -1,38 +1,89 @@
 import React, { Component } from "react";
-import "./App.css";
+import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
+import SignUpForm from "./pages/SignUpForm";
+import SignInForm from "./pages/SignInForm";
 import fire from "./config/Fire";
-import Login from "./Login";
-import Home from "./Home";
+import "./App.css";
+//import Login from "./Login";
+//import Home from "./Home";
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      user: null
-    };
-    this.authListener = this.authListener.bind(this);
-  }
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
+  //     user: null
+  //   };
+  //   this.authListener = this.authListener.bind(this);
+  // }
 
-  conponentDidMount() {
-    this.authListener();
-  }
+  // conponentDidMount() {
+  //   this.authListener();
+  // }
 
-  // authListener is listening to any sign our signout changes.
-  authListener() {
-    fire.auth().onAuthStateChanged(user => {
-      console.log(user);
-      if (user) {
-        this.setState({ user });
-        localStorage.setItem("user", user.uid);
-      } else {
-        this.setState({ user: null });
-        localStorage.removeItem("user");
-      }
-    });
-  }
+  // // authListener is listening to any sign our signout changes.
+  // authListener() {
+  //   fire.auth().onAuthStateChanged(user => {
+  //     console.log(user);
+  //     if (user) {
+  //       this.setState({ user });
+  //       localStorage.setItem("user", user.uid);
+  //     } else {
+  //       this.setState({ user: null });
+  //       localStorage.removeItem("user");
+  //     }
+  //   });
+  // }
 
   render() {
-    return <div className="App">{this.state.user ? <Home /> : <Login />}</div>;
+    return (
+      //<div className="App">{this.state.user ? <Home /> : <Login />}</div>
+      <Router basename="/react-auth-ui/">
+        <div className="App">
+          <div className="App__Aside" />
+          <div className="App__Form">
+            <div className="PageSwitcher">
+              <NavLink
+                to="/sign-in"
+                activeClassName="PageSwitcher__Item--Active"
+                className="PageSwitcher__Item"
+              >
+                Sign In
+              </NavLink>
+              <NavLink
+                exact
+                to="/"
+                activeClassName="PageSwitcher__Item--Active"
+                className="PageSwitcher__Item"
+              >
+                Sign Up
+              </NavLink>
+            </div>
+
+            <div className="FormTitle">
+              <NavLink
+                to="/sign-in"
+                activeClassName="FormTitle__Link--Active"
+                className="FormTitle__Link"
+              >
+                Sign In
+              </NavLink>{" "}
+              or{" "}
+              <NavLink
+                exact
+                to="/"
+                activeClassName="FormTitle__Link--Active"
+                className="FormTitle__Link"
+              >
+                Sign Up
+              </NavLink>
+            </div>
+
+            <Route exact path="/" component={SignUpForm} />
+            <Route path="/sign-in" component={SignInForm} />
+          </div>
+        </div>
+      </Router>
+    );
   }
 }
 
