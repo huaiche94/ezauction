@@ -63,6 +63,8 @@ class MainPage extends Component {
 					</Collapse>
 				</Navbar>
 			</div>
+				<h5>Trending keyword: <span style={{color:'grey'}}>put some of the most used keyword here, and let user search it by click on it</span></h5>
+				<h4 className="alert-heading">Current Items:</h4>
 			<MainPageTable />
 			</React.Fragment>
 		);
