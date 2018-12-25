@@ -12,6 +12,7 @@ import {
 	DropdownMenu,
 	DropdownItem
 } from 'reactstrap';
+import MainPageTable from "./MainPageTable";
 class MainPage extends Component {
 	constructor(props) {
 		super(props);
@@ -28,6 +29,7 @@ class MainPage extends Component {
 	}
 	render() {
 		return (
+			<React.Fragment>
 			<div>
 				<Navbar color="light" light expand="md">
 					<NavbarBrand href="/">Market</NavbarBrand>
@@ -61,6 +63,8 @@ class MainPage extends Component {
 					</Collapse>
 				</Navbar>
 			</div>
+			<MainPageTable />
+			</React.Fragment>
 		);
 	}
 }
