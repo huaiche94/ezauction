@@ -1,10 +1,13 @@
 import React, { Component } from "react";
+import fire from "../config/Fire";
+import { BrowserRouter as Router, NavLink, Route } from "react-router-dom";
+import Home from "../Home.js";
 import { Link } from "react-router-dom";
 
 class SignInForm extends Component {
   constructor() {
     super();
-
+    this.login = this.login.bind(this);
     this.state = {
       email: "",
       password: ""
@@ -16,7 +19,7 @@ class SignInForm extends Component {
 
   handleChange(e) {
     let target = e.target;
-    let value = target.type === "checkbox" ? target.checked : target.value;
+    let value = target.value;
     let name = target.name;
 
     this.setState({
@@ -26,9 +29,20 @@ class SignInForm extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-
     console.log("The form was submitted with the following data:");
     console.log(this.state);
+  }
+
+  login(e) {
+    e.preventDefault();
+    fire
+      .auth()
+      .signInWithEmailAndPassword(this.state.email, this.state.password)
+      .then(u => {})
+      .catch(error => {
+        console.log(error);
+      });
+    console.log("sign in successfully");
   }
 
   render() {
@@ -66,11 +80,18 @@ class SignInForm extends Component {
           </div>
 
           <div className="FormField">
-            <button className="FormField__Button mr-20">Sign In</button>{" "}
+            <button
+              type="submit"
+              onClick={this.login}
+              className="FormField__Button mr-20"
+            >
+              Sign In
+            </button>{" "}
             <Link to="/" className="FormField__Link">
               Create an account
             </Link>
           </div>
+          <Route path="/Home" component={Home} />
         </form>
       </div>
     );

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
 import SignUpForm from "./pages/SignUpForm";
 import SignInForm from "./pages/SignInForm";
-import fire from "./config/Fire";
+// import fire from "./config/Fire";
 import "./App.css";
 //import Login from "./Login";
 //import Home from "./Home";
@@ -77,7 +77,6 @@ class App extends Component {
                 Sign Up
               </NavLink>
             </div>
-
             <Route exact path="/" component={SignUpForm} />
             <Route path="/sign-in" component={SignInForm} />
           </div>
