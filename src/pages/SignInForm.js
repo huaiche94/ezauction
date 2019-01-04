@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import fire from "../config/Fire";
-import { BrowserRouter as Router, NavLink, Route } from "react-router-dom";
+import { BrowserRouter as Router, Link, Route } from "react-router-dom";
 import Home from "../Home.js";
-import { Link } from "react-router-dom";
 
 class SignInForm extends Component {
   constructor() {
@@ -38,62 +37,72 @@ class SignInForm extends Component {
     fire
       .auth()
       .signInWithEmailAndPassword(this.state.email, this.state.password)
-      .then(u => {})
+      .then(u => {
+        var user = fire.auth().currentUser;
+        if (user) {
+          // User is signed in.
+          console.log("sign in successfully");
+          this.props.history.push("/store.html"); // changed ULR to /store.html ????
+        } else {
+          // No user is signed in.
+        }
+      })
       .catch(error => {
         console.log(error);
       });
-    console.log("sign in successfully");
   }
 
   render() {
     return (
-      <div className="FormCenter">
-        <form onSubmit={this.handleSubmit} className="FormFields">
-          <div className="FormField">
-            <label className="FormField__Label" htmlFor="email">
-              E-Mail Address
-            </label>
-            <input
-              type="email"
-              id="email"
-              className="FormField__Input"
-              placeholder="Enter your email"
-              name="email"
-              value={this.state.email}
-              onChange={this.handleChange}
-            />
-          </div>
+      <Router basename="/react-auth-ui/">
+        <div className="FormCenter">
+          <form onSubmit={this.handleSubmit} className="FormFields">
+            <div className="FormField">
+              <label className="FormField__Label" htmlFor="email">
+                E-Mail Address
+              </label>
+              <input
+                type="email"
+                id="email"
+                className="FormField__Input"
+                placeholder="Enter your email"
+                name="email"
+                value={this.state.email}
+                onChange={this.handleChange}
+              />
+            </div>
 
-          <div className="FormField">
-            <label className="FormField__Label" htmlFor="password">
-              Password
-            </label>
-            <input
-              type="password"
-              id="password"
-              className="FormField__Input"
-              placeholder="Enter your password"
-              name="password"
-              value={this.state.password}
-              onChange={this.handleChange}
-            />
-          </div>
+            <div className="FormField">
+              <label className="FormField__Label" htmlFor="password">
+                Password
+              </label>
+              <input
+                type="password"
+                id="password"
+                className="FormField__Input"
+                placeholder="Enter your password"
+                name="password"
+                value={this.state.password}
+                onChange={this.handleChange}
+              />
+            </div>
 
-          <div className="FormField">
-            <button
-              type="submit"
-              onClick={this.login}
-              className="FormField__Button mr-20"
-            >
-              Sign In
-            </button>{" "}
-            <Link to="/" className="FormField__Link">
-              Create an account
-            </Link>
-          </div>
-          <Route path="/Home" component={Home} />
-        </form>
-      </div>
+            <div className="FormField">
+              <button
+                type="submit"
+                onClick={this.login}
+                className="FormField__Button mr-20"
+              >
+                Sign In
+              </button>{" "}
+              <Link to="/" className="FormField__Link">
+                Create an account
+              </Link>
+            </div>
+            <Route path="/home" component={Home} />
+          </form>
+        </div>
+      </Router>
     );
   }
 }

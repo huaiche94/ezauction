@@ -37,7 +37,7 @@ class App extends Component {
   render() {
     return (
       //<div className="App">{this.state.user ? <Home /> : <Login />}</div>
-      <Router basename="/react-auth-ui/">
+      <Router>
         <div className="App">
           <div className="App__Aside" />
           <div className="App__Form">
