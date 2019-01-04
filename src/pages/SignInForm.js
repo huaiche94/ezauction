@@ -8,10 +8,10 @@ class SignInForm extends Component {
     this.login = this.login.bind(this);
     this.state = {
       email: "",
-	  password: "",
-	  isLoggedIn: false
+      password: "",
+      isLoggedIn: false
     };
-	this.isLoggedIn = false
+    this.isLoggedIn = false;
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -38,12 +38,12 @@ class SignInForm extends Component {
       .auth()
       .signInWithEmailAndPassword(this.state.email, this.state.password)
       .then(u => {
-		var user = fire.auth().currentUser;
-		
+        var user = fire.auth().currentUser;
+
         if (user) {
           // User is signed in.
-		  console.log("sign in successfully");
-		  this.setState({isLoggedIn:true})// changed ULR to /store.html ????
+          console.log("sign in successfully");
+          this.setState({ isLoggedIn: true }); // changed ULR to /store.html ????
         } else {
           // No user is signed in.
         }

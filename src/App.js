@@ -9,38 +9,34 @@ import MainPage from "./pages/mainPage";
 //import Home from "./Home";
 
 class App extends Component {
-	constructor(props) {
-	  super(props);
-	  this.state = {
-	    user: null
-	  };
-	  this.authListener = this.authListener.bind(this);
-		fire.auth().onAuthStateChanged(user => {
-			console.log(user);
-			if (user) {
-				this.setState({ user });
-				localStorage.setItem("user", user.uid);
-			} else {
-				this.setState({ user: null });
-				localStorage.removeItem("user");
-			}
-		});
-	}
-	conponentDidMount() {
-	  this.authListener();
-	}
+  constructor(props) {
+    super(props);
+    this.state = {
+      user: null
+    };
+    this.authListener = this.authListener.bind(this);
+    fire.auth().onAuthStateChanged(user => {
+      console.log(user);
+      if (user) {
+        this.setState({ user });
+        localStorage.setItem("user", user.uid);
+      } else {
+        this.setState({ user: null });
+        localStorage.removeItem("user");
+      }
+    });
+  }
+  conponentDidMount() {
+    this.authListener();
+  }
 
-	// authListener is listening to any sign our signout changes.
-	authListener() {
-	  
-	}
+  // authListener is listening to any sign our signout changes.
+  authListener() {}
 
   render() {
-	if (this.state.user != null) {
-		return (
-				<MainPage />
-				);
-	}
+    if (this.state.user != null) {
+      return <MainPage />;
+    }
     return (
       <Router>
         <div className="App">
@@ -84,7 +80,7 @@ class App extends Component {
             </div>
             <Route exact path="/" component={SignUpForm} />
             <Route path="/sign-in" component={SignInForm} />
-			<Route path="/store" component={MainPage} />
+            <Route path="/store" component={MainPage} />
           </div>
         </div>
       </Router>
