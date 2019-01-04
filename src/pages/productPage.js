@@ -1,20 +1,46 @@
 import React, { Component } from "react";
+import fire from "../config/Fire";
 import "./css/style.css";
 import "./css/slick-theme.css";
 import "./css/slick.css";
 import "./css/nouislider.min.css";
 import "./css/font-awesome.min.css";
 import "./css/bootstrap.min.css";
+import { throws } from "assert";
 
 class ProductPage extends Component {
   constructor(props) {
     super(props);
-
     this.toggle = this.toggle.bind(this);
+    this.updatePrice = this.updatePrice.bind(this);
+    this.updateQty = this.updateQty.bind(this);
+    this.qtyUp = this.qtyUp.bind(this);
+    this.qtyDown = this.qtyDown.bind(this);
+    // this.confirm = this.confirm.bind(this);
+
     this.state = {
-      isOpen: false
+      isOpen: false,
+      price: 0,
+      quantity: 0
     };
   }
+  updatePrice(e) {
+    this.setState({ price: e.target.value });
+  }
+  updateQty(e) {
+    this.setState({ quantity: e.target.value });
+  }
+
+  qtyUp() {
+    this.setState({ quantity: this.state.quantity + 1 });
+  }
+  qtyDown() {
+    this.setState({ quantity: this.state.quantity - 1 });
+  }
+  // confirm(){
+  //push data to firebase
+  // }
+
   toggle() {
     this.setState({
       isOpen: !this.state.isOpen
@@ -253,23 +279,34 @@ class ProductPage extends Component {
                     <label>
                       PRICE
                       <div className="input-number">
-                        <input type="number" />
+                        <input
+                          type="number"
+                          value={this.state.price}
+                          onChange={this.updatePrice}
+                        />
                       </div>
                     </label>
                   </div>
 
                   <div className="add-to-cart">
                     <div className="qty-label">
-                      Qty
+                      Qty{" = "}
                       <div className="input-number">
-                        <input type="number" />
-                        <span className="qty-up">+</span>
-                        <span className="qty-down">-</span>
+                        <input
+                          type="number"
+                          value={this.state.quantity}
+                          onChange={this.updateQty}
+                        />
+                        <span className="qty-up" onClick={this.qtyUp}>
+                          +
+                        </span>
+                        <span className="qty-down" onClick={this.qtyDown}>
+                          -
+                        </span>
                       </div>
                     </div>
-                    <button className="add-to-cart-btn">
-                      <i className="fa fa-shopping-cart" />{" "}
-                      <a href="../ezauction/checkout.html">confirm</a>
+                    <button className="add-to-cart-btn" onClick={this.confirm}>
+                      <i className="fa fa-shopping-cart" /> confirm
                     </button>
                   </div>
 
