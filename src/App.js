@@ -2,41 +2,46 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
 import SignUpForm from "./pages/SignUpForm";
 import SignInForm from "./pages/SignInForm";
-// import fire from "./config/Fire";
+import fire from "./config/Fire";
 import "./App.css";
+import MainPage from "./pages/mainPage";
 //import Login from "./Login";
 //import Home from "./Home";
 
 class App extends Component {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     user: null
-  //   };
-  //   this.authListener = this.authListener.bind(this);
-  // }
+	constructor(props) {
+	  super(props);
+	  this.state = {
+	    user: null
+	  };
+	  this.authListener = this.authListener.bind(this);
+		fire.auth().onAuthStateChanged(user => {
+			console.log(user);
+			if (user) {
+				this.setState({ user });
+				localStorage.setItem("user", user.uid);
+			} else {
+				this.setState({ user: null });
+				localStorage.removeItem("user");
+			}
+		});
+	}
+	conponentDidMount() {
+	  this.authListener();
+	}
 
-  // conponentDidMount() {
-  //   this.authListener();
-  // }
-
-  // // authListener is listening to any sign our signout changes.
-  // authListener() {
-  //   fire.auth().onAuthStateChanged(user => {
-  //     console.log(user);
-  //     if (user) {
-  //       this.setState({ user });
-  //       localStorage.setItem("user", user.uid);
-  //     } else {
-  //       this.setState({ user: null });
-  //       localStorage.removeItem("user");
-  //     }
-  //   });
-  // }
+	// authListener is listening to any sign our signout changes.
+	authListener() {
+	  
+	}
 
   render() {
+	if (this.state.user != null) {
+		return (
+				<MainPage />
+				);
+	}
     return (
-      //<div className="App">{this.state.user ? <Home /> : <Login />}</div>
       <Router>
         <div className="App">
           <div className="App__Aside" />
@@ -79,6 +84,7 @@ class App extends Component {
             </div>
             <Route exact path="/" component={SignUpForm} />
             <Route path="/sign-in" component={SignInForm} />
+			<Route path="/store" component={MainPage} />
           </div>
         </div>
       </Router>

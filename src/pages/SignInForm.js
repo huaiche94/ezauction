@@ -2,16 +2,16 @@ import React, { Component } from "react";
 import fire from "../config/Fire";
 import { BrowserRouter as Router, Link, Route } from "react-router-dom";
 import Home from "../Home.js";
-
 class SignInForm extends Component {
   constructor() {
     super();
     this.login = this.login.bind(this);
     this.state = {
       email: "",
-      password: ""
+	  password: "",
+	  isLoggedIn: false
     };
-
+	this.isLoggedIn = false
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -38,11 +38,12 @@ class SignInForm extends Component {
       .auth()
       .signInWithEmailAndPassword(this.state.email, this.state.password)
       .then(u => {
-        var user = fire.auth().currentUser;
+		var user = fire.auth().currentUser;
+		
         if (user) {
           // User is signed in.
-          console.log("sign in successfully");
-          this.props.history.push("/store.html"); // changed ULR to /store.html ????
+		  console.log("sign in successfully");
+		  this.setState({isLoggedIn:true})// changed ULR to /store.html ????
         } else {
           // No user is signed in.
         }
