@@ -44,6 +44,8 @@ class Login extends Component {
         console.log(error);
       });
   }
+
+
   render() {
     return (
       <div className="col-md-6">
@@ -83,6 +85,7 @@ class Login extends Component {
           >
             Login
           </button>
+          
           <button
             onClick={this.signup}
             style={{ marginLeft: "25px" }}

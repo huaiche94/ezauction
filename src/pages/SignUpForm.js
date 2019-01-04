@@ -1,10 +1,11 @@
 import React, { Component } from "react";
+import fire from "../config/Fire";
 import { Link } from "react-router-dom";
 
 class SignUpForm extends Component {
   constructor() {
     super();
-
+    this.signup = this.signup.bind(this);
     this.state = {
       email: "",
       password: "",
@@ -28,9 +29,21 @@ class SignUpForm extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-
     console.log("The form was submitted with the following data:");
     console.log(this.state);
+  }
+
+  signup(e) {
+    e.preventDefault();
+    fire
+      .auth()
+      .createUserWithEmailAndPassword(this.state.email, this.state.password)
+      .then(u => {
+        console.log(u);
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }
 
   render() {
@@ -52,20 +65,6 @@ class SignUpForm extends Component {
             />
           </div>
           <div className="FormField">
-            <label className="FormField__Label" htmlFor="password">
-              Password
-            </label>
-            <input
-              type="password"
-              id="password"
-              className="FormField__Input"
-              placeholder="Enter your password"
-              name="password"
-              value={this.state.password}
-              onChange={this.handleChange}
-            />
-          </div>
-          <div className="FormField">
             <label className="FormField__Label" htmlFor="email">
               E-Mail Address
             </label>
@@ -76,6 +75,20 @@ class SignUpForm extends Component {
               placeholder="Enter your email"
               name="email"
               value={this.state.email}
+              onChange={this.handleChange}
+            />
+          </div>
+          <div className="FormField">
+            <label className="FormField__Label" htmlFor="password">
+              Password
+            </label>
+            <input
+              type="password"
+              id="password"
+              className="FormField__Input"
+              placeholder="Enter your password"
+              name="password"
+              value={this.state.password}
               onChange={this.handleChange}
             />
           </div>
@@ -97,7 +110,9 @@ class SignUpForm extends Component {
           </div>
 
           <div className="FormField">
-            <button className="FormField__Button mr-20">Sign Up</button>{" "}
+            <button onClick={this.signup} className="FormField__Button mr-20">
+              Sign Up
+            </button>{" "}
             <Link to="/sign-in" className="FormField__Link">
               I'm already member
             </Link>
