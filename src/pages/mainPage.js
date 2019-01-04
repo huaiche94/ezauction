@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import "./css/style.css";
-//import "./css/slick-theme.css";
-// import "./css/slick.css";
-// import "./css/nouislider.min.css";
-// import "./css/font-awesome.min.css";
-// import "./css/bootstrap.min.css";
+import "./css/slick-theme.css";
+import "./css/slick.css";
+import "./css/nouislider.min.css";
+import "./css/font-awesome.min.css";
+import "./css/bootstrap.min.css";
 
 class MainPage extends Component {
   constructor(props) {
@@ -158,35 +158,7 @@ class MainPage extends Component {
             </div>
           </div>
         </header>
-        <nav id="navigation">
-          <div className="container">
-            <div id="responsive-nav">
-              <ul className="main-nav nav navbar-nav">
-                <li className="active">
-                  <a href="#">Home</a>
-                </li>
-                <li>
-                  <a href="#">Hot Deals</a>
-                </li>
-                <li>
-                  <a href="#">Categories</a>
-                </li>
-                <li>
-                  <a href="#">Laptops</a>
-                </li>
-                <li>
-                  <a href="#">Smartphones</a>
-                </li>
-                <li>
-                  <a href="#">Cameras</a>
-                </li>
-                <li>
-                  <a href="#">Accessories</a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </nav>
+
         <div id="breadcrumb" className="section">
           <div className="container">
             <div className="row">
@@ -993,21 +965,6 @@ class MainPage extends Component {
                     Copyright © All rights reserved | This template is made with{" "}
                     <i className="fa fa-heart-o" aria-hidden="true" /> by
                     Colorlib - More Templates{" "}
-                    <a
-                      href="http://www.cssmoban.com/"
-                      target="_blank"
-                      title="模板之家"
-                    >
-                      模板之家
-                    </a>{" "}
-                    - Collect from{" "}
-                    <a
-                      href="http://www.cssmoban.com/"
-                      title="网页模板"
-                      target="_blank"
-                    >
-                      网页模板
-                    </a>
                   </span>
                 </div>
               </div>

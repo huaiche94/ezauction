@@ -5,6 +5,7 @@ import SignInForm from "./pages/SignInForm";
 import fire from "./config/Fire";
 import "./App.css";
 import MainPage from "./pages/mainPage";
+import ProductPage from "./pages/productPage";
 //import Login from "./Login";
 //import Home from "./Home";
 
