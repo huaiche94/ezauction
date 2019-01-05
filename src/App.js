@@ -36,7 +36,14 @@ class App extends Component {
 
   render() {
     if (this.state.user != null) {
-      return <MainPage />;
+		return (
+			<Router>
+				<div>
+					<Route exact path="/" component={MainPage} />
+					<Route path="/product" component={ProductPage} />
+				</div>
+			</Router>
+		)
     }
     return (
       <Router>
@@ -81,7 +88,6 @@ class App extends Component {
             </div>
             <Route exact path="/" component={SignUpForm} />
             <Route path="/sign-in" component={SignInForm} />
-            <Route path="/store" component={MainPage} />
           </div>
         </div>
       </Router>
