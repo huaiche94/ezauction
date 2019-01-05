@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { BrowserRouter as Router, Route,Link } from "react-router-dom";
+import ProductPage from "./productPage";
 import "./css/style.css";
 import "./css/slick-theme.css";
 import "./css/slick.css";
@@ -107,7 +109,7 @@ class MainPage extends Component {
                             </div>
                             <div className="product-body">
                               <h3 className="product-name">
-                                <a href="#">product name goes here</a>
+							   <a href="/product">product name goes here</a>
                               </h3>
                               <h4 className="product-price">
                                 <span className="qty">1x</span>$980.00
@@ -394,7 +396,7 @@ class MainPage extends Component {
                       <div className="product-body">
                         <p className="product-category">Category</p>
                         <h3 className="product-name">
-                          <a href="#">product name goes here</a>
+                          <a href="/product">product name goes here</a>
                         </h3>
                         <h4 className="product-price">
                           $980.00{" "}
