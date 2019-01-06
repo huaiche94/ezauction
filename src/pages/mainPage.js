@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import fire from "../config/Fire";
 import { BrowserRouter as Router, Route,Link } from "react-router-dom";
 import ProductPage from "./productPage";
 import "./css/style.css";
@@ -22,6 +23,14 @@ class MainPage extends Component {
       isOpen: !this.state.isOpen
     });
   }
+  logout() {
+	  fire
+		  .auth()
+		  .signOut()
+		  .then(u => {
+			console.log("You are logouted")
+		  })
+  }
   render() {
     return (
       <div>
@@ -30,9 +39,7 @@ class MainPage extends Component {
             <div className="container">
               <ul className="header-links pull-left">
                 <li>
-                  <a href="#">
-                    <i className="fa fa-phone" /> +021-95-51-84
-                  </a>
+					<i className="fa fa-phone" onClick={() => this.logout()} /> logout
                 </li>
                 <li>
                   <a href="#">
