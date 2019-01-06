@@ -11,17 +11,20 @@ import { throws } from "assert";
 class ProductPage extends Component {
   constructor(props) {
     super(props);
+    this.logout = this.logout.bind(this);
     this.toggle = this.toggle.bind(this);
     this.updatePrice = this.updatePrice.bind(this);
     this.updateQty = this.updateQty.bind(this);
     this.qtyUp = this.qtyUp.bind(this);
     this.qtyDown = this.qtyDown.bind(this);
+    this.updateLocation = this.updateLocation.bind(this);
     // this.confirm = this.confirm.bind(this);
 
     this.state = {
       isOpen: false,
       price: 0,
-      quantity: 0
+      quantity: 0,
+      location: "Taipei"
     };
   }
   updatePrice(e) {
@@ -32,14 +35,20 @@ class ProductPage extends Component {
   }
 
   qtyUp() {
-    this.setState({ quantity: this.state.quantity + 1 });
+    this.setState({ quantity: Number(this.state.quantity) + 1 });
   }
   qtyDown() {
-    this.setState({ quantity: this.state.quantity - 1 });
+    this.setState({ quantity: Number(this.state.quantity) - 1 });
+  }
+  updateLocation(e) {
+    this.setState({ location: e.target.value });
   }
   // confirm(){
   //push data to firebase
   // }
+  logout() {
+    fire.auth().signOut();
+  }
 
   toggle() {
     this.setState({
@@ -55,29 +64,20 @@ class ProductPage extends Component {
               <ul className="header-links pull-left">
                 <li>
                   <a href="#">
-                    <i className="fa fa-phone" /> +021-95-51-84
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <i className="fa fa-envelope-o" /> email@email.com
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <i className="fa fa-map-marker" /> 1734 Stonecoal Road
+                    <i className="fa fa-map-marker" onClick={this.logout} />{" "}
+                    Logout
                   </a>
                 </li>
               </ul>
               <ul className="header-links pull-right">
                 <li>
                   <a href="#">
-                    <i className="fa fa-dollar" /> USD
+                    <i className="fa fa-dollar" /> Buyer
                   </a>
                 </li>
                 <li>
                   <a href="#">
-                    <i className="fa fa-user-o" /> My Account
+                    <i className="fa fa-user-o" /> Seller
                   </a>
                 </li>
               </ul>
@@ -212,18 +212,6 @@ class ProductPage extends Component {
                   <div className="product-preview">
                     <img src={require("./img/product01.png")} alt="" />
                   </div>
-
-                  <div className="product-preview">
-                    <img src={require("./img/product03.png")} alt="" />
-                  </div>
-
-                  <div className="product-preview">
-                    <img src={require("./img/product06.png")} alt="" />
-                  </div>
-
-                  <div className="product-preview">
-                    <img src={require("./img/product08.png")} alt="" />
-                  </div>
                 </div>
               </div>
 
@@ -290,7 +278,7 @@ class ProductPage extends Component {
 
                   <div className="add-to-cart">
                     <div className="qty-label">
-                      Qty{" = "}
+                      Quantity{" = "}
                       <div className="input-number">
                         <input
                           type="number"
@@ -305,6 +293,20 @@ class ProductPage extends Component {
                         </span>
                       </div>
                     </div>
+
+                    <div className="product-options">
+                      <label>
+                        Location
+                        <div className="input-number">
+                          <input
+                            type="text"
+                            value={this.state.location}
+                            onChange={this.updateLocation}
+                          />
+                        </div>
+                      </label>
+                    </div>
+
                     <button className="add-to-cart-btn" onClick={this.confirm}>
                       <i className="fa fa-shopping-cart" /> confirm
                     </button>

@@ -16,14 +16,15 @@ class App extends Component {
       user: null
     };
     this.authListener = this.authListener.bind(this);
+
     fire.auth().onAuthStateChanged(user => {
       console.log(user);
       if (user) {
         this.setState({ user });
-        localStorage.setItem("user", user.uid);
+        //localStorage.setItem("user", user.uid);
       } else {
         this.setState({ user: null });
-        localStorage.removeItem("user");
+        //localStorage.removeItem("user");
       }
     });
   }

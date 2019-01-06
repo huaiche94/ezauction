@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route,Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import ProductPage from "./productPage";
+import fire from "../config/Fire";
 import "./css/style.css";
 import "./css/slick-theme.css";
 import "./css/slick.css";
@@ -11,7 +12,7 @@ import "./css/bootstrap.min.css";
 class MainPage extends Component {
   constructor(props) {
     super(props);
-
+    this.logout = this.logout.bind(this);
     this.toggle = this.toggle.bind(this);
     this.state = {
       isOpen: false
@@ -22,6 +23,11 @@ class MainPage extends Component {
       isOpen: !this.state.isOpen
     });
   }
+
+  logout() {
+    fire.auth().signOut();
+  }
+
   render() {
     return (
       <div>
@@ -30,9 +36,7 @@ class MainPage extends Component {
             <div className="container">
               <ul className="header-links pull-left">
                 <li>
-                  <a href="#">
-                    <i className="fa fa-phone" /> +021-95-51-84
-                  </a>
+                  <button onClick={this.logout}>Logout</button>
                 </li>
                 <li>
                   <a href="#">
@@ -109,7 +113,7 @@ class MainPage extends Component {
                             </div>
                             <div className="product-body">
                               <h3 className="product-name">
-							   <a href="/product">product name goes here</a>
+                                <a href="/product">product name goes here</a>
                               </h3>
                               <h4 className="product-price">
                                 <span className="qty">1x</span>$980.00

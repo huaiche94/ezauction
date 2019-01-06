@@ -34,6 +34,15 @@ class SignInForm extends Component {
 
   login(e) {
     e.preventDefault();
+
+    fire
+      .auth()
+      .setPersistence(fire.auth.Auth.Persistence.NONE)
+      .then(function() {})
+      .catch(function(error) {
+        // Handle Errors here.
+      });
+
     fire
       .auth()
       .signInWithEmailAndPassword(this.state.email, this.state.password)
