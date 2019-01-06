@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import fire from "../config/Fire";
+import firebase from "firebase";
 import { BrowserRouter as Router, Link, Route } from "react-router-dom";
 import Home from "../Home.js";
 class SignInForm extends Component {
@@ -12,7 +13,8 @@ class SignInForm extends Component {
       isLoggedIn: false
     };
     this.isLoggedIn = false;
-    this.handleChange = this.handleChange.bind(this);
+	this.handleChange = this.handleChange.bind(this);
+	this.login = this.login.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -33,21 +35,15 @@ class SignInForm extends Component {
   }
 
   login(e) {
-    e.preventDefault();
+	e.preventDefault();
+	let  email = this.state.email
+	let  password = this.state.password
     fire
-      .auth()
-      .signInWithEmailAndPassword(this.state.email, this.state.password)
-      .then(u => {
-        var user = fire.auth().currentUser;
-
-        if (user) {
-          // User is signed in.
-          console.log("sign in successfully");
-          this.setState({ isLoggedIn: true }); // changed ULR to /store.html ????
-        } else {
-          // No user is signed in.
-        }
-      })
+	  .auth()
+		.setPersistence(firebase.auth.Auth.Persistence.SESSION)
+	  .then(function () {
+		return fire.auth().signInWithEmailAndPassword(email, password )
+	  })
       .catch(error => {
         console.log(error);
       });
@@ -90,7 +86,7 @@ class SignInForm extends Component {
 
             <div className="FormField">
               <button
-                type="submit"
+                type="button"
                 onClick={this.login}
                 className="FormField__Button mr-20"
               >

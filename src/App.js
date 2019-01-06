@@ -17,10 +17,10 @@ class App extends Component {
     };
     this.authListener = this.authListener.bind(this);
     fire.auth().onAuthStateChanged(user => {
-      console.log(user);
       if (user) {
         this.setState({ user });
-        localStorage.setItem("user", user.uid);
+		localStorage.setItem("user", user.uid);
+		 
       } else {
         this.setState({ user: null });
         localStorage.removeItem("user");
@@ -36,6 +36,7 @@ class App extends Component {
 
   render() {
     if (this.state.user != null) {
+		console.log("Uid:" + this.state.user.uid)
 		return (
 			<Router>
 				<div>
@@ -44,7 +45,8 @@ class App extends Component {
 				</div>
 			</Router>
 		)
-    }
+	}
+	console.log("no user")
     return (
       <Router>
         <div className="App">

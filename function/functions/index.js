@@ -11,6 +11,7 @@ const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 admin.initializeApp();
 
+exports.createItem = functions.database.ref('')
 exports.push = functions.database.ref('/:id/name/')
 	.onCreate((snapshot, context) => {
 		// Grab the current value of what was written to the Realtime Database.
