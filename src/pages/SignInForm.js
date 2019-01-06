@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import fire from "../config/Fire";
 import { BrowserRouter as Router, Link, Route } from "react-router-dom";
 import Home from "../Home.js";
+import firebase from 'firebase'
+
 class SignInForm extends Component {
   constructor() {
     super();
@@ -37,7 +39,7 @@ class SignInForm extends Component {
 
     fire
       .auth()
-      .setPersistence(fire.auth.Auth.Persistence.NONE)
+		.setPersistence(firebase.auth.Auth.Persistence.NONE)
       .then(function() {})
       .catch(function(error) {
         // Handle Errors here.
@@ -104,7 +106,7 @@ class SignInForm extends Component {
                 className="FormField__Button mr-20"
               >
                 Sign In
-              </button>{" "}
+			  </button>{" "}
               <Link to="/" className="FormField__Link">
                 Create an account
               </Link>

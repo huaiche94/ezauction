@@ -431,7 +431,7 @@ class MainPage extends Component {
                       <div className="add-to-cart">
                         <button className="add-to-cart-btn">
                           <i className="fa fa-shopping-cart" />{" "}
-                          <a href="../ezauction/product.html">add to cart</a>{" "}
+                          <a href="/product">add to cart</a>{" "}
                         </button>
                       </div>
                     </div>
